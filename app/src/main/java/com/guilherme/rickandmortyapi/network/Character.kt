@@ -20,3 +20,8 @@ data class Info(
     @Json(name = "previous")
     val previous: String
 )
+
+data class InfoResponse(
+    @Json(name = "info")
+    val info: List<Info>
+)

@@ -12,8 +12,8 @@ class InfoViewModel : ViewModel() {
 
     private val page: Int = 1
 
-    private var _infoLiveData = MutableLiveData<String>()
-    val infoLiveData: LiveData<String>
+    private var _infoLiveData = MutableLiveData<List<Info>>()
+    val infoLiveData: LiveData<List<Info>>
         get() = _infoLiveData
 
     init {
@@ -23,20 +23,18 @@ class InfoViewModel : ViewModel() {
     fun getInfoPages(page: Int) {
         val client = ApiClient.apiService.fetchInfo(page.toString())
 
-        client.enqueue(object : Callback<Info> {
+        client.enqueue(object : Callback<InfoResponse> {
 
-            override fun onResponse(call: Call<Info>,response: Response<Info>) {
+            override fun onResponse(call: Call<InfoResponse>,response: Response<InfoResponse>) {
                 if (response.isSuccessful) {
                     Log.d("checkpage", "" + response.body())
-                    _infoLiveData.postValue(response.body()?.next)
+                    _infoLiveData.postValue(response.body()?.info)
                 }
             }
 
-            override fun onFailure(call: Call<Info>, t: Throwable) {
+            override fun onFailure(call: Call<InfoResponse>, t: Throwable) {
                 Log.e("failed", "" + t.message)
             }
-
-
         })
     }
 }

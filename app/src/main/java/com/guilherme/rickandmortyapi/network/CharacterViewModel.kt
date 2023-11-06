@@ -21,13 +21,10 @@ class CharacterViewModel : ViewModel() {
     }
 
     fun getCharacterApiResult(page: String) {
-        val client = ApiClient.apiService.fetchCharacter(page.toString())
+        val client = ApiClient.apiService.fetchCharacter(page)
 
         client.enqueue(object : Callback<CharacterResponse> {
-            override fun onResponse(
-                call: Call<CharacterResponse>,
-                response: Response<CharacterResponse>
-            ) {
+            override fun onResponse(call: Call<CharacterResponse>,response: Response<CharacterResponse>) {
                 if (response.isSuccessful) {
                     Log.d("characters", "" + response.body())
                     _characterLiveData.postValue(response.body()?.result)

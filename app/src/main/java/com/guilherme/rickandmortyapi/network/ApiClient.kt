@@ -35,6 +35,6 @@ interface ApiService{
     fun fetchCharacter(@Query("page") page: String): Call<CharacterResponse>
 
     @GET("character")
-    fun fetchInfo(@Query("page") page: String): Call<Info>
+    fun fetchInfo(@Query("page") page: String): Call<InfoResponse>
 
 }

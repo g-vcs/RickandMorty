@@ -18,9 +18,22 @@ class MainActivity : AppCompatActivity() {
         ViewModelProvider(this).get(CharacterViewModel::class.java)
     }
 
+    private val infoViewModel: InfoViewModel by lazy {
+        ViewModelProvider(this).get(InfoViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val page = infoViewModel.infoLiveData
+        Log.d("pageLiveData", "${infoViewModel.infoLiveData.value}")
+
+        infoViewModel.infoLiveData.observe(this){
+            Log.d("pageLiveData", "${it.get(0)}")
+
+        }
+
 
         viewModel.pokemonLiveData.observe(this){result ->
             val adapter = MainAdapter(result)
@@ -31,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
             val nextPage = findViewById<Button>(R.id.btn_next_page)
             nextPage.setOnClickListener {
-                viewModel.getCharacterApiResult("2")
+                viewModel.getCharacterApiResult(infoViewModel.infoLiveData)
             }
         }
     }
