@@ -13,3 +13,10 @@ data class CharacterResponse(
     @Json(name = "results")
     val result: List<Character>
 )
+
+data class Info(
+    @Json(name = "next")
+    val next: String,
+    @Json(name = "previous")
+    val previous: String
+)

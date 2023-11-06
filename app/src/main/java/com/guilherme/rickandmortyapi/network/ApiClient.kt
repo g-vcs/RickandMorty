@@ -17,7 +17,6 @@ object ApiClient {
         .add(KotlinJsonAdapterFactory())
         .build()
 
-
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -34,5 +33,8 @@ interface ApiService{
 
     @GET("character")
     fun fetchCharacter(@Query("page") page: String): Call<CharacterResponse>
+
+    @GET("character")
+    fun fetchInfo(@Query("page") page: String): Call<Info>
 
 }
