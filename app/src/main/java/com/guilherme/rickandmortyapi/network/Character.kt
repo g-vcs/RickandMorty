@@ -11,5 +11,13 @@ data class Character(
 
 data class CharacterResponse(
     @Json(name = "results")
-    val result: List<Character>
+    val result: List<Character>,
+    @Json(name = "info")
+    val info: InfoResponse
+)
+
+data class InfoResponse(
+    @Json(name = "next")
+    val next: String?,
+    //val prev: String?
 )

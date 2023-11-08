@@ -21,7 +21,6 @@ class MainAdapter(val characterList: List<Character>) :
             name.text = character.name
             image.load(character.image) {
                 transformations(CircleCropTransformation())
-
             }
 
         }
