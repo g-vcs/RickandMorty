@@ -15,6 +15,7 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                 Log.e("failed", "" + t.message)
             }
         })
+
     }
 
     fun handlePageNumberFormat(link: String?): Int? {

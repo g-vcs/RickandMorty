@@ -1,5 +1,7 @@
 package com.guilherme.rickandmortyapi
 
+package com.guilherme.rickandmortyapi
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +16,12 @@ import coil.transform.CircleCropTransformation
 import com.guilherme.rickandmortyapi.network.Character
 import com.guilherme.rickandmortyapi.network.CharacterViewModel
 
-class MainAdapter(val characterList: List<Character>) :
+class InfoAdapter(val characterList: List<Character>) :
     RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     lateinit var viewModel: CharacterViewModel
 
-    inner class MainViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class InfoViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindData(character: Character) {
             val name = itemView.findViewById<TextView>(R.id.name)
             val image = itemView.findViewById<ImageView>(R.id.image)

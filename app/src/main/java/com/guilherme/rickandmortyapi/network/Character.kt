@@ -20,4 +20,5 @@ data class InfoResponse(
     @Json(name = "next")
     val next: String?,
     //val prev: String?
+
 )
