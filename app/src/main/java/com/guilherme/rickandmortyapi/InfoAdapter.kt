@@ -1,7 +1,5 @@
 package com.guilherme.rickandmortyapi
 
-package com.guilherme.rickandmortyapi
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,7 @@ import com.guilherme.rickandmortyapi.network.Character
 import com.guilherme.rickandmortyapi.network.CharacterViewModel
 
 class InfoAdapter(val characterList: List<Character>) :
-    RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+    RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
 
     lateinit var viewModel: CharacterViewModel
 
@@ -33,8 +31,8 @@ class InfoAdapter(val characterList: List<Character>) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        return MainViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfoViewHolder {
+        return InfoViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.rv_item, parent, false)
         )
     }
@@ -43,7 +41,7 @@ class InfoAdapter(val characterList: List<Character>) :
         return characterList.size
     }
 
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: InfoViewHolder, position: Int) {
         holder.bindData(characterList[position])
     }
 }
