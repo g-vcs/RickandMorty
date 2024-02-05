@@ -3,19 +3,16 @@ package com.guilherme.rickandmortyapi
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.guilherme.rickandmortyapi.network.Character
 import com.guilherme.rickandmortyapi.network.CharacterViewModel
 
-class MainAdapter(val characterList: List<Character>) :
-    RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class CharacterAdapter(val characterList: List<Character>) :
+    RecyclerView.Adapter<CharacterAdapter.MainViewHolder>() {
 
     lateinit var viewModel: CharacterViewModel
 

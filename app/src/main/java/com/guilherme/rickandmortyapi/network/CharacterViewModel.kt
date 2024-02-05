@@ -1,40 +1,32 @@
 package com.guilherme.rickandmortyapi.network
 
+
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+
+private const val TAG = "CharacterViewModel"
 
 class CharacterViewModel : ViewModel() {
 
-/*    private val page:String = "1"
+    private val repository = RickandMortyRepository()
 
-    private var _characterLiveData = MutableLiveData<List<Character>>()
-    val pokemonLiveData: LiveData<List<Character>>
-        get() = _characterLiveData
+    private val _characterItems: MutableStateFlow<List<Character>> = MutableStateFlow(emptyList())
+    val characterItem: StateFlow<List<Character>>
+        get() = _characterItems
 
     init {
-        getCharacterApiResult(page)
+        viewModelScope.launch {
+            try {
+                val items = repository.fetchCharacters()
+                Log.d(TAG, "Items received: $items")
+                _characterItems.value = items
+            } catch (ex: Exception) {
+                Log.e(TAG, "Failed to fetch News items", ex)
+            }
+        }
     }
-
-    fun getCharacterApiResult(page: String) {
-        val client = ApiClient.apiService.fetchCharacter(page)
-
-        client.enqueue(object : Callback<CharacterResponse> {
-            override fun onResponse(call: Call<CharacterResponse>,response: Response<CharacterResponse>) {
-                if (response.isSuccessful) {
-                    Log.d("characters", "" + response.body())
-                    _characterLiveData.postValue(response.body()?.result)
-                }
-            }
-
-            override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {
-                Log.e("failed", "" + t.message)
-            }
-
-        })
-    }*/
 }
