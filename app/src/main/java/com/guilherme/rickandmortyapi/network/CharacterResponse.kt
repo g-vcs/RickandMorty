@@ -1,14 +1,15 @@
 package com.guilherme.rickandmortyapi.network
 
-import com.squareup.moshi.Json
-
+data class CharacterResponse(
+    val results: List<Character>
+)
 data class Character(
-    @Json(name = "name")
     val name: String,
-    @Json(name = "image")
     val image: String
 )
 
+<<<<<<< HEAD:app/src/main/java/com/guilherme/rickandmortyapi/network/CharacterResponse.kt
+=======
 data class CharacterResponse(
     @Json(name = "results")
     val result: List<Character>
@@ -25,3 +26,4 @@ data class InfoResponse(
     @Json(name = "info")
     val info: List<Info>
 )
+>>>>>>> main:app/src/main/java/com/guilherme/rickandmortyapi/network/Character.kt

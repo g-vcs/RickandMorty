@@ -2,6 +2,9 @@ package com.guilherme.rickandmortyapi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+<<<<<<< HEAD
+
+=======
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.guilherme.rickandmortyapi.network.CharacterViewModel
 import com.guilherme.rickandmortyapi.network.Info
 import com.guilherme.rickandmortyapi.network.InfoViewModel
+>>>>>>> main
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +30,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+<<<<<<< HEAD
+
+
+=======
         val page = infoViewModel.infoLiveData
         Log.d("pageLiveData", "${infoViewModel.infoLiveData.value}")
 
@@ -47,5 +55,6 @@ class MainActivity : AppCompatActivity() {
                 viewModel.getCharacterApiResult(infoViewModel.infoLiveData)
             }
         }
+>>>>>>> main
     }
 }
