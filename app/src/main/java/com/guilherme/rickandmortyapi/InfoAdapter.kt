@@ -14,12 +14,12 @@ import coil.transform.CircleCropTransformation
 import com.guilherme.rickandmortyapi.network.Character
 import com.guilherme.rickandmortyapi.network.CharacterViewModel
 
-class MainAdapter(val characterList: List<Character>) :
-    RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class InfoAdapter(val characterList: List<Character>) :
+    RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
 
     lateinit var viewModel: CharacterViewModel
 
-    inner class MainViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class InfoViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindData(character: Character) {
             val name = itemView.findViewById<TextView>(R.id.name)
             val image = itemView.findViewById<ImageView>(R.id.image)
@@ -31,21 +31,17 @@ class MainAdapter(val characterList: List<Character>) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-<<<<<<< HEAD
-        return MainViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.character_item, parent,false))
-=======
-        return MainViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfoViewHolder {
+        return InfoViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.rv_item, parent, false)
         )
->>>>>>> main
     }
 
     override fun getItemCount(): Int {
         return characterList.size
     }
 
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: InfoViewHolder, position: Int) {
         holder.bindData(characterList[position])
     }
 }
