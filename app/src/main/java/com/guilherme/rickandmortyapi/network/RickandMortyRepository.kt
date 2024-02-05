@@ -18,4 +18,3 @@ class RickandMortyRepository {
 
     suspend fun fetchCharacters(): List<Character> = newsAPi.fetchCharacter().results
 }
-

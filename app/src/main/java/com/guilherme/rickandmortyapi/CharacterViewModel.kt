@@ -1,9 +1,10 @@
-package com.guilherme.rickandmortyapi.network
-
+package com.guilherme.rickandmortyapi
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.guilherme.rickandmortyapi.network.Character
+import com.guilherme.rickandmortyapi.network.RickandMortyRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

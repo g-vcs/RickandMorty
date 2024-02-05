@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.guilherme.rickandmortyapi.network.Character
-import com.guilherme.rickandmortyapi.network.CharacterViewModel
 
 class CharacterAdapter(val characterList: List<Character>) :
     RecyclerView.Adapter<CharacterAdapter.MainViewHolder>() {

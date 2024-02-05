@@ -1,4 +1,4 @@
-package com.guilherme.rickandmortyapi.network
+package com.guilherme.rickandmortyapi
 
 import android.os.Bundle
 import android.util.Log
@@ -10,12 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.guilherme.rickandmortyapi.CharacterAdapter
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.guilherme.rickandmortyapi.databinding.FragmentLandPageBinding
 import kotlinx.coroutines.launch
 
-private const val TAG = "MainFragment"
+private const val TAG = "CharacterFragment"
 
 class LandPageFragment: Fragment() {
 
@@ -32,7 +31,8 @@ class LandPageFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLandPageBinding.inflate(inflater, container, false)
-        binding.landpage.layoutManager = LinearLayoutManager(context)
+        binding.landpage.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         return binding.root
     }
 
@@ -53,5 +53,4 @@ class LandPageFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
