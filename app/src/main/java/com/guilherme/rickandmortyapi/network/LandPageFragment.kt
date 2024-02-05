@@ -28,7 +28,6 @@ class LandPageFragment: Fragment() {
     ): View? {
         _binding = FragmentLandPageBinding.inflate(inflater, container, false)
         binding.landpage.layoutManager = LinearLayoutManager(context)
-        //binding.landPage.layoutManager = LinearLayoutManager(context)
         return binding.root
     }
 
@@ -37,7 +36,7 @@ class LandPageFragment: Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             val response = RickandMortyRepository().fetchCharacters()
-            Log.d(TAG, "Response received: $response")
+            Log.d(TAG, "Response received is now: $response")
         }
     }
 

@@ -10,7 +10,7 @@ import retrofit2.Response
 
 class CharacterViewModel : ViewModel() {
 
-    private val page:String = "1"
+/*    private val page:String = "1"
 
     private var _characterLiveData = MutableLiveData<List<Character>>()
     val pokemonLiveData: LiveData<List<Character>>
@@ -36,5 +36,5 @@ class CharacterViewModel : ViewModel() {
             }
 
         })
-    }
+    }*/
 }

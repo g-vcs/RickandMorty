@@ -32,13 +32,7 @@ class MainAdapter(val characterList: List<Character>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-<<<<<<< HEAD
         return MainViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.character_item, parent,false))
-=======
-        return MainViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.rv_item, parent, false)
-        )
->>>>>>> main
     }
 
     override fun getItemCount(): Int {

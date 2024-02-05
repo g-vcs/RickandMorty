@@ -8,5 +8,4 @@ interface RickMortyApi {
     @GET("character")
     suspend fun fetchCharacter(): CharacterResponse
 
-
 }
