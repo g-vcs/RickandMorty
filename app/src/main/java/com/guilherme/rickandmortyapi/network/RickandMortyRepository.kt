@@ -1,5 +1,11 @@
 package com.guilherme.rickandmortyapi.network
 
+import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.guilherme.rickandmortyapi.paging.PagingSource
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -17,4 +23,8 @@ class RickandMortyRepository {
     }
 
     suspend fun fetchCharacters(): List<Character> = newsAPi.fetchCharacter().results
+
+
+    suspend fun getData(nextPageNumber: Int): CharacterResponse = newsAPi.fetchCharacterByPage(nextPageNumber)
+
 }

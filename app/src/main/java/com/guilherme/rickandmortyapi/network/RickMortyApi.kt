@@ -8,4 +8,7 @@ interface RickMortyApi {
     @GET("character")
     suspend fun fetchCharacter(): CharacterResponse
 
+    @GET("character")
+    suspend fun fetchCharacterByPage(@Query("page") page: Int): CharacterResponse
+
 }
