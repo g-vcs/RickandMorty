@@ -10,17 +10,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.guilherme.rickandmortyapi.databinding.FragmentLandPageBinding
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 private const val TAG = "CharacterFragment"
 
-class LandPageFragment: Fragment() {
+class LandPageFragment : Fragment() {
 
     private var _binding: FragmentLandPageBinding? = null
     private val binding
-        get() = checkNotNull(_binding){
+        get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
         }
     private val characterViewModel: CharacterViewModel by viewModels()
@@ -39,14 +41,26 @@ class LandPageFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val characterAdapter = CharacterAdapter()
+
+        binding.landpage.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = characterAdapter
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                characterViewModel.characterItem.collect{ items ->
-                    Log.d(TAG, "Response received is now: $items")
-                    binding.landpage.adapter = CharacterAdapter(items)
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                characterViewModel.characterItem.collectLatest { pagingData ->
+                    characterAdapter.submitData(pagingData)
                 }
             }
         }
+
+        /*viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            characterViewModel.characterItem.collectLatest {
+                characterAdapter.submitData(it)
+            }
+        }*/
     }
 
     override fun onDestroyView() {

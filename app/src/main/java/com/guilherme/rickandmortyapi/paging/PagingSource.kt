@@ -1,31 +1,43 @@
 package com.guilherme.rickandmortyapi.paging
 
+import android.net.Uri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.guilherme.rickandmortyapi.network.Character
 import com.guilherme.rickandmortyapi.network.CharacterResponse
 import com.guilherme.rickandmortyapi.network.RickandMortyRepository
+import retrofit2.HttpException
 
-class PagingSource : PagingSource<Int, CharacterResponse>() {
+class PagingSource(private val repository: RickandMortyRepository) :
+    PagingSource<Int, Character>() {
 
-    private val repository = RickandMortyRepository()
 
-    override fun getRefreshKey(state: PagingState<Int, CharacterResponse>): Int? {
-        TODO("Not yet implemented")
-    }
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
+        val pageNumber = params.key ?: 1
+        return try {
+            val response = repository.getData(pageNumber)
+            val pagedResponse = response.body()
+            val data = pagedResponse?.results
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CharacterResponse> {
-        try {
-            val nextPageNumber = params.key ?: 1 // Initial page number is 1
-            val response = repository.getData(nextPageNumber)
+            var nextPageNumber: Int? = null
+            if (pagedResponse?.info?.next != null) {
+                val uri = Uri.parse(pagedResponse.info.next)
+                val nextPageQuery = uri.getQueryParameter("page")
+                nextPageNumber = nextPageQuery?.toInt()
+            }
 
-            return LoadResult.Page(
-                data = response.data,
-                prevKey = if (nextPageNumber == 1) null else nextPageNumber - 1,
-                nextKey = if (response.hasMore) nextPageNumber + 1 else null
+            LoadResult.Page(
+                data = data.orEmpty(),
+                prevKey = null,
+                nextKey = nextPageNumber
             )
         } catch (e: Exception) {
-            return LoadResult.Error(e)
+            LoadResult.Error(e)
         }
     }
+
+    override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
+        return null
+    }
+
 }

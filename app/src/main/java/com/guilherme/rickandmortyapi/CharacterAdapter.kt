@@ -5,18 +5,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.guilherme.rickandmortyapi.network.Character
 
-class CharacterAdapter(val characterList: List<Character>) :
-    RecyclerView.Adapter<CharacterAdapter.MainViewHolder>() {
+class CharacterAdapter() :
+    PagingDataAdapter<Character , CharacterAdapter.MainViewHolder>(CharacterComparator) {
 
     lateinit var viewModel: CharacterViewModel
 
     inner class MainViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindData(character: Character) {
+        fun bind(character: Character) {
             val name = itemView.findViewById<TextView>(R.id.name)
             val image = itemView.findViewById<ImageView>(R.id.image)
 
@@ -31,11 +33,16 @@ class CharacterAdapter(val characterList: List<Character>) :
         return MainViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.character_item, parent,false))
     }
 
-    override fun getItemCount(): Int {
-        return characterList.size
+    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        getItem(position)?.let { holder.bind(it) }
     }
 
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bindData(characterList[position])
+
+    object CharacterComparator : DiffUtil.ItemCallback<Character>() {
+        override fun areItemsTheSame(oldItem: Character, newItem: Character) =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Character, newItem: Character) =
+            oldItem == newItem
     }
 }
