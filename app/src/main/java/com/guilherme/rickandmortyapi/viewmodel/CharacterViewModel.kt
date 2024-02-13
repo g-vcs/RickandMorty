@@ -1,4 +1,4 @@
-package com.guilherme.rickandmortyapi
+package com.guilherme.rickandmortyapi.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -12,7 +12,6 @@ import com.guilherme.rickandmortyapi.network.RickandMortyRepository
 import com.guilherme.rickandmortyapi.paging.PagingSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 private const val TAG = "CharacterViewModel"
@@ -22,13 +21,13 @@ class CharacterViewModel : ViewModel() {
     private val repository = RickandMortyRepository()
 
     private var _characterItems: Flow<PagingData<Character>> = MutableStateFlow(PagingData.empty())
-    val characterItem: Flow<PagingData<Character>>
-        get() = _characterItems
+/*    val characterItem: Flow<PagingData<Character>>
+        get() = _characterItems*/
 
-/*    val characters: Flow<PagingData<Character>> =
-        Pager(config = PagingConfig(pageSize = 20, prefetchDistance = 2),
-            pagingSourceFactory = { PagingSource(repository) }
-        ).flow.cachedIn(viewModelScope)*/
+    val characterItem: Flow<PagingData<Character>> =
+        Pager(PagingConfig(pageSize = 20, prefetchDistance = 2)) {
+            PagingSource(repository)
+        }.flow.cachedIn(viewModelScope)
 
 
     init {

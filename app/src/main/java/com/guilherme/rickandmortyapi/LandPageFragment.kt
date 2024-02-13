@@ -1,7 +1,6 @@
 package com.guilherme.rickandmortyapi
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.guilherme.rickandmortyapi.databinding.FragmentLandPageBinding
+import com.guilherme.rickandmortyapi.viewmodel.CharacterViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -44,7 +43,7 @@ class LandPageFragment : Fragment() {
         val characterAdapter = CharacterAdapter()
 
         binding.landpage.apply {
-            layoutManager = LinearLayoutManager(context)
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = characterAdapter
         }
 
@@ -55,12 +54,6 @@ class LandPageFragment : Fragment() {
                 }
             }
         }
-
-        /*viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            characterViewModel.characterItem.collectLatest {
-                characterAdapter.submitData(it)
-            }
-        }*/
     }
 
     override fun onDestroyView() {
