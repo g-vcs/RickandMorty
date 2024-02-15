@@ -6,9 +6,9 @@ data class CharacterResponse(
 )
 
 data class Character(
-    //val created: String,
-    //val episode: List<String>,
-    //val gender: String,
+    val created: String,
+    val episode: List<String>,
+    val gender: String,
     val id: Int,
     val image: String,
     val location: Location,
