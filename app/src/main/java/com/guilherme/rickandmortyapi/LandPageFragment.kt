@@ -46,11 +46,11 @@ class LandPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        composeView.setContent {
+        /*composeView.setContent {
             val characterList by characterViewModel.characterItem.collectAsState()
 
             CharactersScreen(characterItems = characterList)
-        }
+        }*/
 
 
         val characterAdapter = CharacterAdapter()
