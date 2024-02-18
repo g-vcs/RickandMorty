@@ -13,12 +13,14 @@ import com.guilherme.rickandmortyapi.paging.PagingSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 private const val TAG = "CharacterViewModel"
 
-class CharacterViewModel : ViewModel() {
+class CharacterViewModel : ViewModel(), KoinComponent {
 
-    private val repository = RickandMortyRepository()
+    private val repository: RickandMortyRepository by inject()
 
     private var _characterItems: Flow<PagingData<Character>> = MutableStateFlow(PagingData.empty())
 /*    val characterItem: Flow<PagingData<Character>>
