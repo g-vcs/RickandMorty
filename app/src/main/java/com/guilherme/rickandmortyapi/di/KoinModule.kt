@@ -2,6 +2,8 @@ package com.guilherme.rickandmortyapi.di
 
 import com.guilherme.rickandmortyapi.network.RickMortyApi
 import com.guilherme.rickandmortyapi.network.RickandMortyRepository
+import com.guilherme.rickandmortyapi.viewmodel.CharacterViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,4 +25,8 @@ val networkModule = module {
 
 val repositoryModule = module {
     single { RickandMortyRepository(get()) }
+}
+
+val appModule = module {
+    viewModel {CharacterViewModel()}
 }
