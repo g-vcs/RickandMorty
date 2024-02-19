@@ -1,5 +1,6 @@
 package com.guilherme.rickandmortyapi.network
 
+import com.guilherme.rickandmortyapi.model.CharacterResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,5 +1,7 @@
 package com.guilherme.rickandmortyapi.network
 
+import com.guilherme.rickandmortyapi.model.Character
+import com.guilherme.rickandmortyapi.model.CharacterResponse
 import retrofit2.Response
 
 class RickandMortyRepository(private val rickMortyApi: RickMortyApi) {

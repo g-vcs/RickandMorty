@@ -1,4 +1,4 @@
-package com.guilherme.rickandmortyapi.network
+package com.guilherme.rickandmortyapi.model
 
 data class CharacterResponse(
     val info: Info,
