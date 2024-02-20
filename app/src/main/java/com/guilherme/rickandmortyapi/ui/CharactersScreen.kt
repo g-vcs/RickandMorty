@@ -1,5 +1,7 @@
 package com.guilherme.rickandmortyapi.ui
 
+import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,17 +20,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
 import com.guilherme.rickandmortyapi.model.Character
 import com.guilherme.rickandmortyapi.viewmodel.CharacterViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 
+
 @Composable
-fun CharactersScreen(viewModel: CharacterViewModel = viewModel()) {
+fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController: NavController) {
+    val context = LocalContext.current
     val characterPagingItems: LazyPagingItems<Character> = viewModel.characterItem.collectAsLazyPagingItems()
 
     LazyVerticalGrid(
@@ -48,6 +54,7 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel()) {
                     modifier = Modifier
                         .size(120.dp)
                         .clip(CircleShape)
+                        .clickable { navController.navigate(Destination.charInfoScreen.route) }
                 ) {
                     AsyncImage(
                         model = characterPagingItems[index]?.image,
