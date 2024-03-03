@@ -1,7 +1,7 @@
 package com.guilherme.rickandmortyapi.ui
 
 sealed class Destination (val route: String) {
-    object characterScreen: Destination("characterScreen")
-    object charInfoScreen: Destination("charInfoScreen")
+    data object CharacterScreen: Destination("characterScreen")
+    data object CharInfoScreen: Destination("charInfoScreen")
 
 }

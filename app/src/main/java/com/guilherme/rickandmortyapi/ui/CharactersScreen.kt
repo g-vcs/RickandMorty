@@ -1,5 +1,6 @@
 package com.guilherme.rickandmortyapi.ui
 
+import android.os.Bundle
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -37,6 +38,7 @@ import com.guilherme.rickandmortyapi.viewmodel.CharacterViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.guilherme.rickandmortyapi.R
+import androidx.navigation.NavBackStackEntry
 
 
 @Composable
@@ -51,7 +53,7 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
     ) {
 
             Image(
-                painterResource(id = R.drawable.ic_launcher_background),
+                painterResource(id = R.drawable.rick_and_morty),
                 contentDescription = "",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
@@ -78,7 +80,9 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
                             modifier = Modifier
                                 .size(120.dp)
                                 .clip(CircleShape)
-                                .clickable { navController.navigate(Destination.charInfoScreen.route) }
+                                .clickable {
+                                    navController.navigate(Destination.CharInfoScreen.route)
+                                }
                         ) {
                             AsyncImage(
                                 model = characterPagingItems[index]?.image,

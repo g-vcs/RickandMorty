@@ -10,8 +10,9 @@ import com.guilherme.rickandmortyapi.di.networkModule
 import com.guilherme.rickandmortyapi.di.repositoryModule
 import com.guilherme.rickandmortyapi.ui.CharInfoScreen
 import com.guilherme.rickandmortyapi.ui.CharactersScreen
-import com.guilherme.rickandmortyapi.ui.Destination.charInfoScreen
-import com.guilherme.rickandmortyapi.ui.Destination.characterScreen
+import com.guilherme.rickandmortyapi.ui.Destination.CharInfoScreen
+import com.guilherme.rickandmortyapi.ui.Destination.CharacterScreen
+import com.guilherme.rickandmortyapi.ui.ScreenNavigation
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -26,12 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContent {
-            val navController = rememberNavController()
-
-            NavHost(navController = navController, startDestination = characterScreen.route){
-                composable(characterScreen.route) { CharactersScreen(navController = navController)}
-                composable(charInfoScreen.route) { CharInfoScreen()}
-            }
+            ScreenNavigation()
         }
     }
 }
