@@ -10,4 +10,6 @@ class RickandMortyRepository(private val rickMortyApi: RickMortyApi) {
 
     suspend fun getData(nextPageNumber: Int): Response<CharacterResponse> =
         rickMortyApi.fetchCharacterByPage(nextPageNumber)
+
+    suspend fun getSingleCharacter(id: String?) = rickMortyApi.getSingleCharacter(id)
 }

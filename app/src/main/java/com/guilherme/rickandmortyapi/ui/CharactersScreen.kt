@@ -81,7 +81,7 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
                                 .size(120.dp)
                                 .clip(CircleShape)
                                 .clickable {
-                                    navController.navigate(Destination.CharInfoScreen.route)
+                                    navController.navigate(Destination.CharInfoScreen.route + "/${characterPagingItems[index]?.id}")
                                 }
                         ) {
                             AsyncImage(

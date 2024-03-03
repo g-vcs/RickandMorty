@@ -17,9 +17,10 @@ fun ScreenNavigation() {
         ) { CharactersScreen(navController = navController) }
 
         composable(
-            route = Destination.CharInfoScreen.route,
+            route = Destination.CharInfoScreen.route +"/{characterId}"
         ) {
-            CharInfoScreen()
+            val data = it.arguments?.getString("characterId")
+            CharInfoScreen(characterId = data)
         }
     }
 }
