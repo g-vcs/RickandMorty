@@ -60,8 +60,8 @@ fun  CharInfoScreen(
     }
 
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colors.background
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         Column(
             modifier = Modifier

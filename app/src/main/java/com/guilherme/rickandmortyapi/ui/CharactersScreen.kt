@@ -59,6 +59,9 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
+                    .clickable {
+                        Toast.makeText(context, "Logo image clicked", Toast.LENGTH_SHORT).show()
+                    }
             )
 
             LazyVerticalGrid(
@@ -93,7 +96,7 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
                         }
                         Text(
                             text = characterPagingItems[index]?.name ?: "Unknown",
-                            color = Color.Black,
+                            color = Color.Gray,
                             style = MaterialTheme.typography.body1,
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(top = 8.dp)
