@@ -2,6 +2,7 @@ package com.guilherme.rickandmortyapi.network
 
 import com.guilherme.rickandmortyapi.model.Character
 import com.guilherme.rickandmortyapi.model.CharacterResponse
+import com.guilherme.rickandmortyapi.model.LocationResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,6 +18,9 @@ interface RickMortyApi {
 
     @GET("character/{id}")
     suspend fun getSingleCharacter(@Path("id") id: String?): Character
+
+    @GET("character")
+    suspend fun fetchAllLocations(): LocationResponse
 
 
 

@@ -32,6 +32,11 @@ data class Origin(
     val url: String
 )
 
+data class LocationResponse(
+    val info: Info,
+    val results: List<Location>
+)
+
 data class Location(
     val name: String,
     val url: String

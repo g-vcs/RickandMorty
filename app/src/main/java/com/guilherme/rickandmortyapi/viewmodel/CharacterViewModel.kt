@@ -24,22 +24,13 @@ private const val TAG = "CharacterViewModel"
 class CharacterViewModel : ViewModel(), KoinComponent {
 
     private val repository: RickandMortyRepository by inject()
-    private var _characterItems: Flow<PagingData<Character>> = MutableStateFlow(PagingData.empty())
-
-    val singleCharacter: StateFlow<Character>
-        get() = _singleCharacter
-
-    val characterItem: Flow<PagingData<Character>> =
-        Pager(PagingConfig(pageSize = 20, prefetchDistance = 2)) {
-            PagingSource(repository)
-        }.flow.cachedIn(viewModelScope)
 
     private val charX = Character(
         created = "",
         episode = emptyList(),
         gender = "",
         id = 1,
-        image = "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+        image = "",
         location = Location("", ""),
         name = "",
         origin = Origin("", ""),
@@ -49,6 +40,14 @@ class CharacterViewModel : ViewModel(), KoinComponent {
         url = ""
     )
 
+    private var _characterItems: Flow<PagingData<Character>> = MutableStateFlow(PagingData.empty())
+    val characterItem: Flow<PagingData<Character>> =
+        Pager(PagingConfig(pageSize = 20, prefetchDistance = 2)) {
+            PagingSource(repository)
+        }.flow.cachedIn(viewModelScope)
+
+    val singleCharacter: StateFlow<Character>
+        get() = _singleCharacter
     private val _singleCharacter: MutableStateFlow<Character> = MutableStateFlow(charX)
 
     init {
@@ -79,4 +78,6 @@ class CharacterViewModel : ViewModel(), KoinComponent {
             }
         }
     }
+
+
 }

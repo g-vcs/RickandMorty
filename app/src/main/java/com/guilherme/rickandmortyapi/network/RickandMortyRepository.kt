@@ -2,6 +2,7 @@ package com.guilherme.rickandmortyapi.network
 
 import com.guilherme.rickandmortyapi.model.Character
 import com.guilherme.rickandmortyapi.model.CharacterResponse
+import com.guilherme.rickandmortyapi.model.Location
 import retrofit2.Response
 
 class RickandMortyRepository(private val rickMortyApi: RickMortyApi) {
@@ -12,4 +13,6 @@ class RickandMortyRepository(private val rickMortyApi: RickMortyApi) {
         rickMortyApi.fetchCharacterByPage(nextPageNumber)
 
     suspend fun getSingleCharacter(id: String?) = rickMortyApi.getSingleCharacter(id)
+
+    suspend fun fetchAllLocations(): List<Location> = rickMortyApi.fetchAllLocations().results
 }

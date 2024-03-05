@@ -17,7 +17,6 @@ val networkModule = module {
             .build()
             .create(RickMortyApi::class.java)
     }
-//    single { get<Retrofit>().create(RickMortyApi::class.java) }
 }
 
 val repositoryModule = module {
