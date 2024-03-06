@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.guilherme.rickandmortyapi.ui.screen.CharInfoScreen
 import com.guilherme.rickandmortyapi.ui.screen.CharactersScreen
+import com.guilherme.rickandmortyapi.ui.screen.EpisodeScreen
 import com.guilherme.rickandmortyapi.ui.screen.HomeScreen
 import com.guilherme.rickandmortyapi.ui.screen.LocationScreen
 
@@ -15,7 +16,7 @@ fun ScreenNavigation() {
 
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Destination.HomeScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.CharacterScreen.route) {
         composable(
             route = Destination.HomeScreen.route
         ) { HomeScreen(navController = navController) }
@@ -34,5 +35,9 @@ fun ScreenNavigation() {
         composable(
             route = Destination.LocationScreen.route
         ) { LocationScreen() }
+
+        composable(
+            route = Destination.EpisodeScreen.route
+        ) { EpisodeScreen() }
     }
 }

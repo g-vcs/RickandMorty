@@ -38,6 +38,26 @@ data class LocationResponse(
 )
 
 data class Location(
+    val created: String,
+    val dimension: String,
+    val id: Int,
+    val name: String,
+    val residents: List<String>,
+    val type: String,
+    val url: String
+)
+
+data class EpisodeResponse(
+    val info: Info,
+    val results: List<Episode>
+)
+
+data class Episode(
+    val air_date: String,
+    val characters: List<String>,
+    val created: String,
+    val episode: String,
+    val id: Int,
     val name: String,
     val url: String
 )

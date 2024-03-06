@@ -43,9 +43,9 @@ fun HomeScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
-                /*.clickable {
-                    Toast.makeText(context, "Logo image clicked", Toast.LENGTH_SHORT).show()
-                }*/
+            /*.clickable {
+                Toast.makeText(context, "Logo image clicked", Toast.LENGTH_SHORT).show()
+            }*/
         )
 
         val characterScreen = ClickableImage(
@@ -56,9 +56,21 @@ fun HomeScreen(navController: NavController) {
             navController = navController
         )
         val locationScreen =
-            ClickableImage(image = R.drawable.ic_launcher_background,modifier = modifier, route = "locationScreen", context, navController)
+            ClickableImage(
+                image = R.drawable.ic_launcher_background,
+                modifier = modifier,
+                route = Destination.LocationScreen.route,
+                context,
+                navController
+            )
         val episodesScreen =
-            ClickableImage(image = R.drawable.ic_launcher_background, modifier = modifier, route = "episodesScreen", context, navController)
+            ClickableImage(
+                image = R.drawable.ic_launcher_background,
+                modifier = modifier,
+                route = Destination.EpisodeScreen.route,
+                context,
+                navController
+            )
 
     }
 
@@ -80,7 +92,9 @@ fun ClickableImage(
             .padding(16.dp)
             .clip(CircleShape)
             .clickable {
-                Toast.makeText(context, "Clicked in $route", Toast.LENGTH_SHORT).show()
+                Toast
+                    .makeText(context, "Clicked in $route", Toast.LENGTH_SHORT)
+                    .show()
                 navController.navigate(route)
             },
         contentScale = ContentScale.Crop

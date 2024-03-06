@@ -31,7 +31,15 @@ class CharacterViewModel : ViewModel(), KoinComponent {
         gender = "",
         id = 1,
         image = "",
-        location = Location("", ""),
+        location = Location(
+            created = "",
+            dimension = "",
+            id = 0,
+            name = "",
+            residents = listOf(),
+            type = "",
+            url = ""
+        ),
         name = "",
         origin = Origin("", ""),
         species = "",

@@ -24,9 +24,10 @@ class LocationViewModel : ViewModel(), KoinComponent {
 
     private val repository: RickandMortyRepository by inject()
 
-    private val _locationItems= MutableStateFlow<List<Location>>(emptyList())
 
-    val locationItem: StateFlow<List<Location>> = _locationItems
+    private val _locationItems:MutableStateFlow<List<Location>> = MutableStateFlow(emptyList())
+    val locationItem: StateFlow<List<Location>>
+        get() = _locationItems
 
 
     init {
@@ -37,9 +38,9 @@ class LocationViewModel : ViewModel(), KoinComponent {
     private fun fetchAllLocations() {
         viewModelScope.launch {
             try {
-                val locationsItems = repository.fetchAllLocations()
-                Log.d(TAG, "Location received: $locationsItems")
-                _locationItems.value = locationsItems
+                val item = repository.fetchAllLocations()
+                Log.d(TAG, "Location received: $item")
+                _locationItems.value = item
 
             } catch (ex: Exception) {
                 Log.e(TAG, "Failed to fetch all location", ex)

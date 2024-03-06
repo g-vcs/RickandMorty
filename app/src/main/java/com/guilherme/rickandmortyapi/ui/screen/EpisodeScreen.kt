@@ -13,7 +13,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,28 +23,43 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.guilherme.rickandmortyapi.viewmodel.LocationViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.guilherme.rickandmortyapi.viewmodel.EpisodeViewModel
 
-@Composable
-fun LocationScreen(
-    viewModel: LocationViewModel = viewModel()
-) {
-    val locationItem by viewModel.locationItem.collectAsState()
+const val TAG = "EpisodeScreen"
 
-    LazyColumn(
+@Composable
+fun EpisodeScreen(
+    viewModel: EpisodeViewModel = viewModel()
+) {
+    val episodeItem by viewModel.episodeItem.collectAsState()
+
+    Log.d(TAG, "info passed: ${episodeItem[0].name}")
+
+
+    Surface(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        item(locationItem) {
-            locationItem.forEach { location ->
-                Text(
-                    text = location.name,
-                    fontSize = 24.sp
-                )
-            }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+
         }
+        AsyncImage(
+            model = episodeItem,
+            contentDescription = "Character Image",
+            modifier = Modifier
+                .size(200.dp)
+                .aspectRatio(1f),
+            contentScale = ContentScale.Crop
+        )
+
+
     }
+
+
 }
