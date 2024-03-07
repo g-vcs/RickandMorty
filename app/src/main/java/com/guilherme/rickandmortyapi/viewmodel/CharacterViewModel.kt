@@ -12,6 +12,7 @@ import com.guilherme.rickandmortyapi.model.Location
 import com.guilherme.rickandmortyapi.model.Origin
 import com.guilherme.rickandmortyapi.network.RickandMortyRepository
 import com.guilherme.rickandmortyapi.paging.PagingSource
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

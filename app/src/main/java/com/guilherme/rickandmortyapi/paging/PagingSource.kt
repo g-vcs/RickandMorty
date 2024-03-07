@@ -5,6 +5,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.guilherme.rickandmortyapi.model.Character
 import com.guilherme.rickandmortyapi.network.RickandMortyRepository
+import kotlinx.coroutines.delay
+import okhttp3.internal.wait
 
 class PagingSource(private val repository: RickandMortyRepository) :
     PagingSource<Int, Character>() {

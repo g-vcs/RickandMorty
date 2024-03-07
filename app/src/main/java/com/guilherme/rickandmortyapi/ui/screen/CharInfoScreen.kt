@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.guilherme.rickandmortyapi.model.LifeState
 import com.guilherme.rickandmortyapi.viewmodel.CharacterViewModel
 
 @Composable()
