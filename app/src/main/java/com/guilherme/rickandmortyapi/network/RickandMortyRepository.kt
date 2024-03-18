@@ -8,10 +8,12 @@ import retrofit2.Response
 
 class RickandMortyRepository(private val rickMortyApi: RickMortyApi) {
 
-    suspend fun fetchCharacters(): List<Character> = rickMortyApi.fetchCharacter().results
+    suspend fun fetchCharacters(name: String?): List<Character> = rickMortyApi.fetchCharacter(name).results
 
     suspend fun getData(nextPageNumber: Int): Response<CharacterResponse> =
         rickMortyApi.fetchCharacterByPage(nextPageNumber)
+
+    suspend fun searchCharacters(name: String): List<Character> = rickMortyApi.searchCharacters(name).results
 
     suspend fun getSingleCharacter(id: String?) = rickMortyApi.getSingleCharacter(id)
 

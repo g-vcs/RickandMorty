@@ -27,7 +27,7 @@ import com.guilherme.rickandmortyapi.viewmodel.CharacterViewModel
 @Composable()
 fun  CharInfoScreen(
     viewModel: CharacterViewModel = viewModel(),
-    characterId:String?,
+    characterId:String,
     ) {
     val TAG = "CharInfoScreen"
 
@@ -37,7 +37,7 @@ fun  CharInfoScreen(
 
     val singleCharacter by viewModel.singleCharacter.collectAsState()
 
-    Log.d(TAG, "info passed: ${singleCharacter.name}")
+    Log.d(TAG, "info passed: ${singleCharacter?.name}")
 
     Surface(
         modifier = Modifier
@@ -50,7 +50,7 @@ fun  CharInfoScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AsyncImage(
-                model = singleCharacter.image,
+                model = singleCharacter?.image,
                 contentDescription = "Character Image",
                 modifier = Modifier
                     .size(200.dp)
@@ -59,32 +59,33 @@ fun  CharInfoScreen(
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = singleCharacter.name,
+                //text = singleCharacter.name,
+                text = "name",
                 fontSize = 24.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Status: ${singleCharacter.status}",
+                text = "Status: ${singleCharacter?.status}",
                 fontSize = 18.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Species: ${singleCharacter.species}",
+                text = "Species: ${singleCharacter?.species}",
                 fontSize = 18.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Gender: ${singleCharacter.gender}",
+                text = "Gender: ${singleCharacter?.gender}",
                 fontSize = 18.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Location: ${singleCharacter.location.name}",
+                text = "Location: ${singleCharacter?.location?.name}",
                 fontSize = 18.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Origin: ${singleCharacter.origin.name}",
+                text = "Origin: ${singleCharacter?.origin?.name}",
                 fontSize = 18.sp
             )
         }

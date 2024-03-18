@@ -26,11 +26,12 @@ fun ScreenNavigation() {
             route = Destination.CharacterScreen.route
         ) { CharactersScreen(navController = navController) }
 
+
         composable(
-            route = Destination.CharInfoScreen.route +"/{characterId}"
-        ) {
-            val data = it.arguments?.getString("characterId")
-            CharInfoScreen(characterId = data)
+            route = "${Destination.CharInfoScreen.route}/{characterId}"
+        ) { navBackStackEntry ->
+            val characterId = navBackStackEntry.arguments?.getString("characterId")
+            characterId?.let { CharInfoScreen(characterId = it) }
         }
 
         composable(

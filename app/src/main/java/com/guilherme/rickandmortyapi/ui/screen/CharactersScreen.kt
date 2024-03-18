@@ -17,10 +17,17 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,6 +36,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -57,8 +66,6 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
     val characterPagingItems: LazyPagingItems<Character> =
         viewModel.characterItem.collectAsLazyPagingItems()
 
-
-
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -74,7 +81,10 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier.fillMaxWidth()
             )
+
         }
+        SearchBar(onSearchTextChanged(viewModel), modifier = Modifier)
+
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             contentPadding = PaddingValues(16.dp),
@@ -163,6 +173,44 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
     }
 }
 
+fun onSearchTextChanged(viewModel: CharacterViewModel): (String?) -> Unit {
+    return { searchText: String? ->
+        if (searchText != null) {
+            viewModel.searchCharacters(searchText)
+        }
+        println("Search text changed: $searchText")
+    }
+}
+
+@Composable
+fun SearchBar(
+    onSearchTextChanged: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var text by remember { mutableStateOf(TextFieldValue()) }
+
+    OutlinedTextField(
+        value = text,
+        onValueChange = {
+            text = it
+            onSearchTextChanged(it.text)
+        },
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        placeholder = { Text("Search") },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions.Default.copy(
+            imeAction = ImeAction.Search
+        ),
+        keyboardActions = KeyboardActions(
+            onSearch = {
+                onSearchTextChanged(text.text)
+            }
+        )
+    )
+}
+
 @Composable
 fun LoadingItem() {
     Box(
@@ -202,7 +250,7 @@ fun CharacterListPreview() {
             status = "Alive",
             image = "image_url_1",
             created = "",
-            episode = emptyList(),
+            //episode = emptyList(),
             gender = "",
             location = Location(
                 created = "",
@@ -224,7 +272,7 @@ fun CharacterListPreview() {
             status = "Alive",
             image = "image_url_2",
             created = "",
-            episode = emptyList(),
+            //episode = emptyList(),
             gender = "",
             location = Location(
                 created = "",
@@ -246,7 +294,7 @@ fun CharacterListPreview() {
             status = "Unknown",
             image = "image_url_3",
             created = "",
-            episode = emptyList(),
+            //episode = emptyList(),
             gender = "",
             location = Location(
                 created = "",
