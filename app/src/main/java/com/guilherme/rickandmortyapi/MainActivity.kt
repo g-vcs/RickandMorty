@@ -3,6 +3,9 @@ package com.guilherme.rickandmortyapi
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.room.Room
+import com.guilherme.rickandmortyapi.db.AppDatabase
+import com.guilherme.rickandmortyapi.di.db
 import com.guilherme.rickandmortyapi.di.networkModule
 import com.guilherme.rickandmortyapi.di.repositoryModule
 import com.guilherme.rickandmortyapi.ui.ScreenNavigation
@@ -16,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         startKoin {
             androidContext(this@MainActivity)
-            modules(listOf(networkModule, repositoryModule))
+            modules(listOf(networkModule, repositoryModule, db))
         }
 
         setContent {

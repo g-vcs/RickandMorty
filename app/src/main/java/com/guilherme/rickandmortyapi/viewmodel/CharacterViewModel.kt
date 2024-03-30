@@ -7,11 +7,13 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.guilherme.rickandmortyapi.db.AppDatabase
 import com.guilherme.rickandmortyapi.model.Character
 import com.guilherme.rickandmortyapi.model.Location
 import com.guilherme.rickandmortyapi.model.Origin
 import com.guilherme.rickandmortyapi.network.RickandMortyRepository
 import com.guilherme.rickandmortyapi.paging.PagingSource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +21,7 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -27,6 +30,7 @@ private const val TAG = "CharacterViewModel"
 class CharacterViewModel : ViewModel(), KoinComponent {
 
     private val repository: RickandMortyRepository by inject()
+    private val db: AppDatabase by inject()
 
     private var _characterItems: Flow<PagingData<Character>> = MutableStateFlow(PagingData.empty())
     val characterItem: Flow<PagingData<Character>> =
@@ -45,7 +49,6 @@ class CharacterViewModel : ViewModel(), KoinComponent {
     init {
         fetchAllCharacters()
         searchCharacters("Alien")
-
     }
 
     private fun fetchAllCharacters() {
@@ -68,6 +71,9 @@ class CharacterViewModel : ViewModel(), KoinComponent {
                 val character = repository.getSingleCharacter(id)
                 Log.d(TAG, "this character received: $character")
                 _singleCharacter.value = character
+                withContext(Dispatchers.IO){
+                    db.characterDao().insertCharacter(character)
+                }
 
             } catch (ex: Exception) {
                 Log.e(TAG, "Failed to fetch Single Character ", ex)

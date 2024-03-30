@@ -99,6 +99,14 @@ dependencies {
     implementation 'androidx.activity:activity-compose:1.8.2'
     debugImplementation "androidx.compose.ui:ui-tooling:1.6.1"
 
+    //Room
+    def room_version = "2.6.1"
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-paging:$room_version"
+
+
     //Koin
     implementation "io.insert-koin:koin-android:3.2.0"
 }

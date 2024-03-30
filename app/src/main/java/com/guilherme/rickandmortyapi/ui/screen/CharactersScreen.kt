@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
@@ -34,7 +33,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
@@ -46,17 +44,15 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
 import androidx.paging.LoadState.Loading
-import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
-import com.guilherme.rickandmortyapi.model.Character
-import com.guilherme.rickandmortyapi.viewmodel.CharacterViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.guilherme.rickandmortyapi.R
+import com.guilherme.rickandmortyapi.model.Character
 import com.guilherme.rickandmortyapi.model.Location
 import com.guilherme.rickandmortyapi.model.Origin
 import com.guilherme.rickandmortyapi.ui.Destination
-
+import com.guilherme.rickandmortyapi.viewmodel.CharacterViewModel
 import java.util.Locale
 
 
@@ -252,7 +248,7 @@ fun CharacterListPreview() {
             created = "",
             //episode = emptyList(),
             gender = "",
-            location = Location(
+            /*location = Location(
                 created = "",
                 dimension = "",
                 id = 0,
@@ -264,7 +260,7 @@ fun CharacterListPreview() {
             origin = Origin("", ""),
             species = "",
             type = "",
-            url = ""
+            url = ""*/
         ),
         Character(
             id = 2,
@@ -274,7 +270,7 @@ fun CharacterListPreview() {
             created = "",
             //episode = emptyList(),
             gender = "",
-            location = Location(
+            /*location = Location(
                 created = "",
                 dimension = "",
                 id = 0,
@@ -286,7 +282,7 @@ fun CharacterListPreview() {
             origin = Origin("", ""),
             species = "",
             type = "",
-            url = ""
+            url = ""*/
         ),
         Character(
             id = 3,
@@ -296,7 +292,7 @@ fun CharacterListPreview() {
             created = "",
             //episode = emptyList(),
             gender = "",
-            location = Location(
+            /*location = Location(
                 created = "",
                 dimension = "",
                 id = 0,
@@ -308,7 +304,7 @@ fun CharacterListPreview() {
             origin = Origin("", ""),
             species = "",
             type = "",
-            url = ""
+            url = ""*/
         ),
         // Add more sample characters as needed
     )

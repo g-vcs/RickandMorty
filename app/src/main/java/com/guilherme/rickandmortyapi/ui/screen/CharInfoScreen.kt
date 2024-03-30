@@ -79,15 +79,15 @@ fun  CharInfoScreen(
                 fontSize = 18.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
+            /*Text(
                 text = "Location: ${singleCharacter?.location?.name}",
                 fontSize = 18.sp
-            )
+            )*/
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
+            /*Text(
                 text = "Origin: ${singleCharacter?.origin?.name}",
                 fontSize = 18.sp
-            )
+            )*/
         }
     }
 }
