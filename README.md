@@ -7,8 +7,8 @@ This project is a simple Rick and Morty app that consumes data from [The Rick an
 
 
 <p align="center">
-<img src="https://s9.gifyu.com/images/SVGdr.gif" width="250"/> 
-<img src="https://s9.gifyu.com/images/SVGdY.gif" width="250"/> 
+<img src="land_page_RaM.gif" width="250"/> 
+<img src="search_RaM.gif" width="250"/> 
 </p>
 
 ## Features:
