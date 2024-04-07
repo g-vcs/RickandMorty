@@ -9,21 +9,25 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.guilherme.rickandmortyapi.db.AppDatabase
 import com.guilherme.rickandmortyapi.model.Character
-import com.guilherme.rickandmortyapi.model.Location
-import com.guilherme.rickandmortyapi.model.Origin
+import com.guilherme.rickandmortyapi.model.CharacterResponse
 import com.guilherme.rickandmortyapi.network.RickandMortyRepository
+//import com.guilherme.rickandmortyapi.paging.PagingSearchSource
 import com.guilherme.rickandmortyapi.paging.PagingSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import retrofit2.Response
+import kotlin.time.Duration.Companion.milliseconds
 
 private const val TAG = "CharacterViewModel"
 
@@ -33,29 +37,44 @@ class CharacterViewModel : ViewModel(), KoinComponent {
     private val db: AppDatabase by inject()
 
     private var _characterItems: Flow<PagingData<Character>> = MutableStateFlow(PagingData.empty())
-    val characterItem: Flow<PagingData<Character>> =
-        Pager(PagingConfig(pageSize = 20, prefetchDistance = 2)) {
-            PagingSource(repository)
-        }.flow.cachedIn(viewModelScope)
+    val characterItem: Flow<PagingData<Character>>
+        get() = _characterItems
+
 
     val singleCharacter: StateFlow<Character?>
         get() = _singleCharacter
     private val _singleCharacter: MutableStateFlow<Character?> = MutableStateFlow(Character())
 
-    val _search: MutableStateFlow<List<Character>?> = MutableStateFlow(emptyList())
-    val search: StateFlow<List<Character>?>
-        get() = _search
+    private val _isSearchShowing = MutableStateFlow(false)
+
+    val isSearchShowing = _isSearchShowing.asStateFlow()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = false,
+        )
+
+
+
+    private val _search = MutableStateFlow("")
+    val search = _search.asStateFlow()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = "",
+        )
+
+
+
 
     init {
         fetchAllCharacters()
-        searchCharacters("Alien")
+        //searchCharacters("Alien")
     }
 
     private fun fetchAllCharacters() {
         viewModelScope.launch {
             try {
-                val items = repository.fetchCharacters("")
-                Log.d(TAG, "Character received: $items")
                 _characterItems = Pager(config = PagingConfig(pageSize = 20, prefetchDistance = 2),
                     pagingSourceFactory = { PagingSource(repository) }
                 ).flow.cachedIn(viewModelScope)
@@ -83,15 +102,30 @@ class CharacterViewModel : ViewModel(), KoinComponent {
     }
 
     fun searchCharacters(name: String){
-        viewModelScope.launch {
-            try {
-                val currentSearch = repository.fetchCharacters(name)
-                Log.d(TAG, "Search character received: $currentSearch")
-                _search.value = currentSearch
-            } catch (ex: Exception){
-                Log.e(TAG, "Failed to search Characters ", ex)
-            }
-        }
+        Log.d(TAG, "name is : $name")
+//        _characterItems = Pager(config = PagingConfig(pageSize = 20, prefetchDistance = 2),
+//            pagingSourceFactory = { PagingSource(repository, name) }
+//        ).flow.cachedIn(viewModelScope)
+        setSearch(name)
+    }
+
+
+    val searchResult = search.debounce(300.milliseconds).flatMapLatest { query ->
+        Pager(
+            PagingConfig(
+                pageSize = 10,
+                enablePlaceholders = false,
+            )
+        ) {
+            PagingSource(
+                repository = repository,
+                name = query,
+            )
+        }.flow.cachedIn(viewModelScope)
+    }
+
+    fun setSearch(query: String) {
+        _search.value = query
     }
 
 }

@@ -17,8 +17,11 @@ interface RickMortyApi {
     @GET("character")
     suspend fun fetchCharacterByPage(@Query("page") page: Int): Response<CharacterResponse>
 
+    @GET("character")
+    suspend fun fetchCharacterBySearch(@Query("page") page: Int, @Query("name") name : String?): Response<CharacterResponse>
+
     @GET("character/")
-    suspend fun searchCharacters(@Query("name") query: String): CharacterResponse
+    suspend fun searchCharacters(@Query("page") page: Int, @Query("name") query: String): CharacterResponse
 
     @GET("character/{id}")
     suspend fun getSingleCharacter(@Path("id") id: String?): Character

@@ -1,22 +1,20 @@
+/*
 package com.guilherme.rickandmortyapi.paging
 
 import android.net.Uri
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.guilherme.rickandmortyapi.model.Character
 import com.guilherme.rickandmortyapi.network.RickandMortyRepository
-import kotlinx.coroutines.delay
-import okhttp3.internal.wait
 
-class PagingSource(private val repository: RickandMortyRepository, private val name: String ?= "") :
+class PagingSearchSource(private val repository: RickandMortyRepository, private val name: String) :
     PagingSource<Int, Character>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         val pageNumber = params.key ?: 1
         return try {
             val response = repository.getSearchData(pageNumber, name)
-            Log.d("CharacterViewModel", "response paging source is : $response")
+
             val pagedResponse = response.body()
             val data = pagedResponse?.results
 
@@ -43,3 +41,4 @@ class PagingSource(private val repository: RickandMortyRepository, private val n
 
 
 }
+*/

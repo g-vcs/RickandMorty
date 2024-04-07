@@ -13,7 +13,9 @@ class RickandMortyRepository(private val rickMortyApi: RickMortyApi) {
     suspend fun getData(nextPageNumber: Int): Response<CharacterResponse> =
         rickMortyApi.fetchCharacterByPage(nextPageNumber)
 
-    suspend fun searchCharacters(name: String): List<Character> = rickMortyApi.searchCharacters(name).results
+    suspend fun getSearchData(nextPageNumber: Int, name: String?): Response<CharacterResponse> = rickMortyApi.fetchCharacterBySearch(nextPageNumber, name)
+
+    suspend fun searchCharacters(nextPageNumber: Int, name: String): List<Character> = rickMortyApi.searchCharacters(nextPageNumber, name).results
 
     suspend fun getSingleCharacter(id: String?) = rickMortyApi.getSingleCharacter(id)
 

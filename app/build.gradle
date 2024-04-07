@@ -91,6 +91,8 @@ dependencies {
     implementation "androidx.paging:paging-runtime:3.2.1"
     implementation "androidx.paging:paging-common:3.2.1"
     implementation 'androidx.paging:paging-compose:3.2.1'
+    implementation "androidx.paging:paging-compose:1.0.0-alpha12"
+
 
     //Compose
     implementation "androidx.compose.material:material:1.6.1"

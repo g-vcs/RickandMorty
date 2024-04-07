@@ -1,5 +1,6 @@
 package com.guilherme.rickandmortyapi.ui.screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,6 +23,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,13 +56,14 @@ import com.guilherme.rickandmortyapi.model.Origin
 import com.guilherme.rickandmortyapi.ui.Destination
 import com.guilherme.rickandmortyapi.viewmodel.CharacterViewModel
 import java.util.Locale
+import androidx.paging.compose.collectAsLazyPagingItems
 
 
 @Composable
 fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController: NavController) {
     //val context = LocalContext.current
     val characterPagingItems: LazyPagingItems<Character> =
-        viewModel.characterItem.collectAsLazyPagingItems()
+        viewModel.searchResult.collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -162,7 +165,6 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
                             }
                         }
                     }
-
                 }
             }
         }
@@ -173,6 +175,8 @@ fun onSearchTextChanged(viewModel: CharacterViewModel): (String?) -> Unit {
     return { searchText: String? ->
         if (searchText != null) {
             viewModel.searchCharacters(searchText)
+            Log.d("CharacterViewModel", "Search text changed: $searchText")
+
         }
         println("Search text changed: $searchText")
     }
