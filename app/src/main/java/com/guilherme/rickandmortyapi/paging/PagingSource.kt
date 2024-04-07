@@ -6,9 +6,12 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.guilherme.rickandmortyapi.model.Character
 import com.guilherme.rickandmortyapi.network.RickandMortyRepository
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+class PagingSource(private val name: String ?= "") :
+    PagingSource<Int, Character>(), KoinComponent {
 
-class PagingSource(private val repository: RickandMortyRepository, private val name: String ?= "") :
-    PagingSource<Int, Character>() {
+    private val repository: RickandMortyRepository by inject()
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         val pageNumber = params.key ?: 1

@@ -42,7 +42,7 @@ class CharacterViewModel : ViewModel(), KoinComponent {
     val searchResult = search.debounce(300.milliseconds).flatMapLatest { query ->
         Pager(PagingConfig(pageSize = 20,enablePlaceholders = false)
         ) {
-            PagingSource(repository = repository,name = query)
+            PagingSource(name = query)
         }.flow.cachedIn(viewModelScope)
     }
 

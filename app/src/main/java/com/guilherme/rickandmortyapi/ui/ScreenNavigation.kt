@@ -17,7 +17,7 @@ fun ScreenNavigation() {
 
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Destination.CharacterScreen.route) {
+    NavHost(navController = navController, startDestination = Destination.LoadingScreen.route) {
         composable(
             route = Destination.HomeScreen.route
         ) { HomeScreen(navController = navController) }
