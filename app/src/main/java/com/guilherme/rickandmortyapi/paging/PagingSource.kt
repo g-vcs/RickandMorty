@@ -6,8 +6,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.guilherme.rickandmortyapi.model.Character
 import com.guilherme.rickandmortyapi.network.RickandMortyRepository
-import kotlinx.coroutines.delay
-import okhttp3.internal.wait
 
 class PagingSource(private val repository: RickandMortyRepository, private val name: String ?= "") :
     PagingSource<Int, Character>() {
@@ -40,6 +38,4 @@ class PagingSource(private val repository: RickandMortyRepository, private val n
     override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
         return null
     }
-
-
 }
