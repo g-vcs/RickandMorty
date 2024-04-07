@@ -26,6 +26,7 @@ Technologies Used:
 * Paging3
 * Fragments
 * Coil
+* Room
 
 
 
