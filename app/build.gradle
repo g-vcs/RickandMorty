@@ -91,15 +91,17 @@ dependencies {
     implementation "androidx.paging:paging-runtime:3.2.1"
     implementation "androidx.paging:paging-common:3.2.1"
     implementation 'androidx.paging:paging-compose:3.2.1'
-    implementation "androidx.paging:paging-compose:1.0.0-alpha12"
+    implementation "androidx.paging:paging-compose:3.2.1"
 
 
     //Compose
-    implementation "androidx.compose.material:material:1.6.1"
-    implementation "androidx.compose.compiler:compiler:1.5.9"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.6.1"
+    implementation "androidx.compose.material:material:1.6.5"
+    implementation "androidx.compose.compiler:compiler:1.5.11"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.6.5"
     implementation 'androidx.activity:activity-compose:1.8.2'
-    debugImplementation "androidx.compose.ui:ui-tooling:1.6.1"
+    debugImplementation "androidx.compose.ui:ui-tooling:1.6.5"
+    implementation "androidx.compose.material3:material3:1.2.1"
+
 
     //Room
     def room_version = "2.6.1"

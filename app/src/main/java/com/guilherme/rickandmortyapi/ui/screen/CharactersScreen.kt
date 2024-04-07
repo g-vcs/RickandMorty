@@ -23,6 +23,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -75,7 +77,6 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier.fillMaxWidth()
             )
-
         }
         SearchBar(onSearchTextChanged(viewModel), modifier = Modifier)
 
@@ -104,7 +105,7 @@ fun CharactersScreen(viewModel: CharacterViewModel = viewModel(), navController:
                                 .padding(8.dp)
                                 .border(
                                     width = 2.dp,
-                                    color = Color.Black,
+                                    color = Color.Gray,
                                     shape = RoundedCornerShape(5.dp)
                                 )
                         ) {
@@ -192,7 +193,7 @@ fun SearchBar(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
-        placeholder = { Text("Search") },
+        placeholder = { Text("Search", color = Color.Gray) },
         singleLine = true,
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Search
@@ -201,6 +202,11 @@ fun SearchBar(
             onSearch = {
                 onSearchTextChanged(text.text)
             }
+        ),
+        textStyle = TextStyle(color = Color.Gray),
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            focusedBorderColor = Color.Gray, // Set focused border color to grey
+            unfocusedBorderColor = Color.Gray // Set unfocused border color to grey
         )
     )
 }

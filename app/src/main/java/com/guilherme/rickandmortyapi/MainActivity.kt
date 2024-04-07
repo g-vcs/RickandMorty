@@ -1,10 +1,8 @@
 package com.guilherme.rickandmortyapi
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.room.Room
-import com.guilherme.rickandmortyapi.db.AppDatabase
+import androidx.appcompat.app.AppCompatActivity
 import com.guilherme.rickandmortyapi.di.db
 import com.guilherme.rickandmortyapi.di.networkModule
 import com.guilherme.rickandmortyapi.di.repositoryModule
