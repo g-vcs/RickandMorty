@@ -58,11 +58,12 @@ fun  CharInfoScreen(
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                //text = singleCharacter.name,
-                text = "name",
-                fontSize = 24.sp
-            )
+            singleCharacter?.name?.let { name ->
+                Text(
+                    text = name,
+                    fontSize = 24.sp
+                )
+            }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "Status: ${singleCharacter?.status}",
